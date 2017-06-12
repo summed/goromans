@@ -25,17 +25,17 @@ var (
 	}
 )
 
-func TestRToITest(t *testing.T) {
+func TestRtoATest(t *testing.T) {
 	for k, v := range values {
-		if r, err := RToI(k); r != v || err != nil {
+		if r, err := RtoA(k); r != v || err != nil {
 			t.Errorf("'%s' did not match expected value of '%d', but '%d' instead", k, v, r)
 		}
 	}
 }
 
-func TestIToRTest(t *testing.T) {
+func TestAtoRTest(t *testing.T) {
 	for k, v := range values {
-		if r := IToR(v); strings.Compare(r, k) != 0 {
+		if r := AtoR(v); strings.Compare(r, k) != 0 {
 			t.Errorf("'%d' did not match expected value of '%s', but '%s' instead", v, k, r)
 		}
 	}

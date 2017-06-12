@@ -45,16 +45,16 @@ func initialize() {
 	}
 }
 
-// IsRomanNumeral returns true if able to parse string as roman numerals
-func IsRomanNumeral(romans string) bool {
-	if _, err := RToI(romans); err != nil {
-		return true
+// IsRomanNumerals returns true if able to parse string as roman numerals
+func IsRomanNumerals(romans string) bool {
+	if _, err := RtoA(romans); err != nil {
+		return false
 	}
-	return false
+	return true
 }
 
-// RToI converts a string of roman numerals to arabic numerals
-func RToI(romans string) (out uint, err error) {
+// RtoA converts a string of roman numerals to arabic numerals
+func RtoA(romans string) (out uint, err error) {
 	initialize()
 	var last uint
 	if len(romans) == 0 {
@@ -74,8 +74,8 @@ func RToI(romans string) (out uint, err error) {
 	return out, nil
 }
 
-// IToR converts arabic numerals to roman numerals
-func IToR(arabic uint) (romans string) {
+// AtoR converts arabic numerals to roman numerals
+func AtoR(arabic uint) (romans string) {
 	initialize()
 	var out bytes.Buffer
 	var major, minor numeral
