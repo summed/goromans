@@ -40,7 +40,7 @@ func initialize() {
 		for _, s := range sets {
 			romanNumerals[s.roman] = s
 		}
-		sort.Sort(numeralByArabic(sets))
+		sort.Sort(numeralByArabic(sets)) // Strictly not required, since the correct (DESC) order is set at initialization.
 		initialized = true
 	}
 }
@@ -53,28 +53,28 @@ func IsRomanNumeral(romans string) bool {
 	return false
 }
 
-// RToI converts a string of roman numeral to arabic numeral
-func RToI(romans string) (sum uint, err error) {
+// RToI converts a string of roman numerals to arabic numerals
+func RToI(romans string) (out uint, err error) {
 	initialize()
 	var last uint
 	if len(romans) == 0 {
-		return sum, fmt.Errorf("Empty string when parsing to roman numerals")
+		return out, fmt.Errorf("Empty string when parsing to roman numerals")
 	}
 	for i := 0; i < len(romans); i++ {
 		if s, ok := romanNumerals[unicode.ToUpper(rune(romans[i]))]; ok {
 			if s.arabic > last && last > 0 {
-				sum -= 2 * last
+				out -= 2 * last
 			}
-			sum += s.arabic
+			out += s.arabic
 			last = s.arabic
 		} else {
-			return sum, fmt.Errorf("Unable to '%s' to roman numerals, because of character '%s'", romans, string(romans[i]))
+			return out, fmt.Errorf("Unable to '%s' to roman numerals, because of character '%s'", romans, string(romans[i]))
 		}
 	}
-	return sum, nil
+	return out, nil
 }
 
-// IToR converts a arabic numeral to roman numeral
+// IToR converts arabic numerals to roman numerals
 func IToR(arabic uint) (romans string) {
 	initialize()
 	var out bytes.Buffer
