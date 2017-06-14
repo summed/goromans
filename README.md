@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/summed/goromans.svg?branch=master)](https://travis-ci.org/summed/goromans)
 
 # Go-Romans
-A tiny package for converting between arabic and roman numerals
+A tiny package in GO (golang) for converting between arabic and roman numerals
 
 # Install:
 
