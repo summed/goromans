@@ -47,6 +47,7 @@ func initialize() {
 
 // IsRomanNumerals returns true if able to parse string as roman numerals
 func IsRomanNumerals(romans string) bool {
+	initialize()
 	if _, err := RtoA(romans); err != nil {
 		return false
 	}
@@ -68,7 +69,7 @@ func RtoA(romans string) (out uint, err error) {
 			out += s.arabic
 			last = s.arabic
 		} else {
-			return out, fmt.Errorf("Unable to '%s' to roman numerals, because of character '%s'", romans, string(romans[i]))
+			return out, fmt.Errorf("Unable to '%s' to roman numerals, because of character '%c'", romans, romans[i])
 		}
 	}
 	return out, nil

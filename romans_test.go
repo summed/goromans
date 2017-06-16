@@ -1,7 +1,10 @@
 package romans
 
-import "testing"
-import "strings"
+import (
+	"strings"
+	"testing"
+	"unicode"
+)
 
 var (
 	values = map[string]uint{
@@ -25,7 +28,28 @@ var (
 	}
 )
 
-func TestRtoATest(t *testing.T) {
+func TestIsRomanNumerals(t *testing.T) {
+	for k := range values {
+		if !IsRomanNumerals(k) {
+			t.Errorf("'%s' did not match expected as roman numeral value", k)
+		}
+	}
+	var (
+		from  = rune('a')
+		to    = rune('Z')
+		check rune
+	)
+	for i := from; i <= to; i++ {
+		check = unicode.ToUpper(i)
+		if _, ok := romanNumerals[check]; !ok {
+			if IsRomanNumerals(string(i)) {
+				t.Errorf("'%c' unexpectedly match as roman numeral value", i)
+			}
+		}
+	}
+}
+
+func TestRtoA(t *testing.T) {
 	for k, v := range values {
 		if r, err := RtoA(k); r != v || err != nil {
 			t.Errorf("'%s' did not match expected value of '%d', but '%d' instead", k, v, r)
@@ -33,7 +57,7 @@ func TestRtoATest(t *testing.T) {
 	}
 }
 
-func TestAtoRTest(t *testing.T) {
+func TestAtoR(t *testing.T) {
 	for k, v := range values {
 		if r := AtoR(v); strings.Compare(r, k) != 0 {
 			t.Errorf("'%d' did not match expected value of '%s', but '%s' instead", v, k, r)
